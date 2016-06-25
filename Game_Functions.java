@@ -30,7 +30,7 @@ public class Game_Functions {
 			else
 				System.out.print(", ");
 		}
-		System.out.print(" A color may appear more than once in the code. You try to guess what "
+		System.out.print("\nA color may appear more than once in the code. You try to guess what "
 				+ "colored pegs are in the code and what order they are in. \nAfter you make a valid guess the result (feedback) will be displayed."
 				+ "\nThe result consists of a black peg for each peg you have guessed exactly correct (color and position) in your guess. \nFor each peg in "
 				+ "the guess that is the correct color, but is out of position, you get a white peg. For each peg that is fully incorrect,"
@@ -38,25 +38,21 @@ public class Game_Functions {
 				+ "\nWhen entering guesses you only need to enter the first character of each color as a capital letter.\n\n");
 	}
 	
-	public static boolean testContPlaying(boolean contPlaying)
-	{
-		if(contPlaying == true)
-		{
-			return true;
-		}
-		return false;
-	}
-	
 	public static boolean contPlaying()
 	{
 		System.out.print("Are you ready to for another game (Y/N):");
 		Scanner reader = new Scanner(System.in);
 		String answer = reader.nextLine();
-		if(answer.equals("Y"))
+		while((!(answer.equals("Y"))) && (!(answer.equals("N"))))
 		{
-			return true;
+			System.out.println("---INVALID INPUT---");
+			System.out.println("-Please input a Y for yes or a N for no-");
+			System.out.print("Are you ready to for another game (Y/N):");
+			reader = new Scanner(System.in);
+			answer = reader.nextLine();
 		}
-		return false;
+		
+		return answer.equals("Y");
 	}
 	
 	public static void Generate(){

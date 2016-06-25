@@ -17,7 +17,7 @@ public class Game
 			if(testingMode == true)
 			{
 				continuePlaying = runTestingMode();
-				if(Game_Functions.testContPlaying(continuePlaying))
+				if(continuePlaying == true)
 				{
 					continuePlaying = Game_Functions.contPlaying();
 				}
@@ -25,7 +25,7 @@ public class Game
 			else
 			{
 				continuePlaying = runNormGame();
-				if(Game_Functions.testContPlaying(continuePlaying))
+				if(continuePlaying == true)
 				{
 					continuePlaying = Game_Functions.contPlaying();
 				}
@@ -38,16 +38,25 @@ public class Game
 	{
 		System.out.print("You have " + GameConfiguration.guessNumber + " guesses to figure out the secret code or you lose the game. Are you ready to play? (Y/N):");
 		Scanner reader = new Scanner(System.in);
-		String answer = reader.next();
+		String answer = reader.nextLine();
 		int blackPegs=0;
 		int whitePegs=0;
+		
+		while((!(answer.equals("Y"))) && (!(answer.equals("N"))))
+		{
+			System.out.println("---INVALID INPUT---");
+			System.out.println("-Please input a Y for yes or a N for no-");
+			System.out.print("You have " + GameConfiguration.guessNumber + " guesses to figure out the secret code or you lose the game. Are you ready to play? (Y/N):");
+			reader = new Scanner(System.in);
+			answer = reader.nextLine();
+		}
 		
 		if(answer.equals("Y")){
 			Game_Functions.Generate();
 			int num_Guesses=GameConfiguration.guessNumber;
 			while(num_Guesses>=0){
 				Game_Functions.next(num_Guesses);
-				answer = reader.next();
+				answer = reader.nextLine();
 				if(answer.equals("history")){
 					Game_Functions.History(GameConfiguration.guessNumber-num_Guesses);
 				}
@@ -80,16 +89,23 @@ public class Game
 	{
 		System.out.print("You have " + GameConfiguration.guessNumber + " guesses to figure out the secret code or you lose the game. Are you ready to play? (Y/N):");
 		Scanner reader = new Scanner(System.in);
-		String answer = reader.next();
+		String answer = reader.nextLine();
 		int blackPegs=0;
 		int whitePegs=0;
-		
+		while((!(answer.equals("Y"))) && (!(answer.equals("N"))))
+		{
+			System.out.println("---INVALID INPUT---");
+			System.out.println("-Please input a Y for yes or a N for no-");
+			System.out.print("You have " + GameConfiguration.guessNumber + " guesses to figure out the secret code or you lose the game. Are you ready to play? (Y/N):");
+			reader = new Scanner(System.in);
+			answer = reader.nextLine();
+		}
 		if(answer.equals("Y")){
 			Game_Functions.Generate();
 			int num_Guesses=GameConfiguration.guessNumber;
 			while(num_Guesses>=0){
 				Game_Functions.next(num_Guesses);
-				answer = reader.next();
+				answer = reader.nextLine();
 				if(answer.equals("history")){
 					Game_Functions.History(GameConfiguration.guessNumber-num_Guesses);
 				}
