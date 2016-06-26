@@ -4,17 +4,22 @@ public class Game
 {
 	private boolean testingMode;
 	
+	/*
+	 * method that is called to make the game show the secret code
+	 */
 	public Game(boolean testingMode)
 	{
 		this.testingMode = testingMode;
 	}
-	
+	/**
+	 * method that runs the game when it is called
+	 */
 	public void runGame()
 	{
 		boolean continuePlaying = false;
 		do{
 			Game_Functions.startMessage();
-			if(testingMode == true)
+			if(testingMode == true)					//a check to see if the answer needs to be shown
 			{
 				continuePlaying = runTestingMode();
 				if(continuePlaying == true)
@@ -22,7 +27,7 @@ public class Game
 					continuePlaying = Game_Functions.contPlaying();
 				}
 			}
-			else
+			else									//the game will run normally if testing mode is not true
 			{
 				continuePlaying = runNormGame();
 				if(continuePlaying == true)
@@ -30,10 +35,13 @@ public class Game
 					continuePlaying = Game_Functions.contPlaying();
 				}
 			}
-		}while(continuePlaying == true);
-		
+		}
+		while(continuePlaying == true);
 	}
-	
+	/**
+	 * runs normal game 
+	 * @return
+	 */
 	public boolean runNormGame()
 	{
 		System.out.print("You have " + GameConfiguration.guessNumber + " guesses to figure out the secret code or you lose the game. Are you ready to play? (Y/N):");
@@ -85,6 +93,10 @@ public class Game
 		return false;
 	}
 	
+	/**
+	 * method that runs the game in testing mode and shows the answer
+	 * @return
+	 */
 	public boolean runTestingMode()
 	{
 		System.out.print("You have " + GameConfiguration.guessNumber + " guesses to figure out the secret code or you lose the game. Are you ready to play? (Y/N):");

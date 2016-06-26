@@ -14,6 +14,9 @@ public class Game_Functions {
 		return;
 	}
 	
+	/**
+	 * a method that greets the player and gives instructions on how to play the game
+	 */
 	public static void startMessage()
 	{
 		System.out.print("Welcome to Mastermind. Here are the rules. \n\nThis is a text version of the classic board game Mastermind."
@@ -38,6 +41,10 @@ public class Game_Functions {
 				+ "\nWhen entering guesses you only need to enter the first character of each color as a capital letter.\n\n");
 	}
 	
+	/**
+	 * method that runs the game again if the user chooses to play the game again
+	 * @return
+	 */
 	public static boolean contPlaying()
 	{
 		System.out.print("Are you ready to for another game (Y/N):");
@@ -55,11 +62,14 @@ public class Game_Functions {
 		return answer.equals("Y");
 	}
 	
+	/**
+	 * a method that is called to generate the random code for user to guess
+	 */
 	public static void Generate(){
 		System.out.println("Generating secret code ....");
 		Random randomGenerator = new Random();
 		
-		for(int i = 0; i < GameConfiguration.pegNumber; i++)
+		for(int i = 0; i < GameConfiguration.pegNumber; i++)		//the code will generate a code to the number of pegs the game will contain
 		{
 			int randomInt = randomGenerator.nextInt(GameConfiguration.colors.length);
 			Answer[i] = GameConfiguration.colors[randomInt];
@@ -67,6 +77,11 @@ public class Game_Functions {
 		
 	}
 	
+	/**
+	 * checks to see if the user input is a valid input
+	 * @param x, the user inputted string will be passed to this method
+	 * @return, a true or false will be returned depending if the input is valid or not
+	 */
 	public static boolean check_input(String x){
 		if(x.length() != GameConfiguration.pegNumber)
 		{
@@ -91,9 +106,15 @@ public class Game_Functions {
 		return true;
 	}
 
+	/**
+	 * 
+	 * @param x, the user input will be passed to this method as a string
+	 * @param guesses, the number of guesses the user has left
+	 * @return
+	 */
 	public static int Pegs_Check(String x, int guesses){
 		int black_Pegs=0;
-		String[] comparison = new String[GameConfiguration.pegNumber];
+		String[] comparison = new String[GameConfiguration.pegNumber];	
 		for(int i=0; i<GameConfiguration.pegNumber; i+=1){
 			comparison[i] = Answer[i];
 		}
@@ -101,32 +122,35 @@ public class Game_Functions {
 		for(int i=0; i<GameConfiguration.pegNumber; i+=1){
 			answer[i] = Character.toString(x.charAt(i));
 		}
-		for(int element=0; element<GameConfiguration.pegNumber; element +=1){
+		for(int element=0; element<GameConfiguration.pegNumber; element +=1){		//a check done to see how many black pegs the user has
 			for(int index=0; index<Answer.length; index+=1){
-				if(answer[element].equals(comparison[index]) && element == index){
-					black_Pegs+=1;
-					comparison[index]="0";
+				if(answer[element].equals(comparison[index]) && element == index){	//if the elements match then a black peg will be 
+					black_Pegs+=1;													//incremented and that element needs to be removed
+					comparison[index]="0";											//from the check
 					answer[element]="1";
 				}
 			}
 		}
 		int white_Pegs=0;
-		for(int element = 0; element<GameConfiguration.pegNumber;element +=1){
+		for(int element = 0; element<GameConfiguration.pegNumber;element +=1){		//a check done to see how many white pegs the user has
 			for(int index=0;  index<comparison.length; index+=1){
-				if(answer[element].equals(comparison[index]) && element != index){
-					white_Pegs+=1;
-					comparison[index]="0";
+				if(answer[element].equals(comparison[index]) && element != index){	//if the element is contained within the answer
+					white_Pegs+=1;													//then a white peg needs to be incremented
+					comparison[index]="0";											//and the element needs to be removed from the check
 					answer[element]="1";
 				}
 			}
 		}
-		History[guesses]= x;
-		Black_Peg_H[guesses]=black_Pegs;
+		History[guesses]= x;				//once checked, the guess will be stored into a string array
+		Black_Peg_H[guesses]=black_Pegs;	//the number of black and white pegs will be stored into a string array as well
 		White_Peg_H[guesses]=white_Pegs;
 		System.out.println(x + " -> Result: " + black_Pegs + " black peg(s) and " + white_Pegs + " white peg(s)");
 		return black_Pegs;
 	}
-	
+	/**
+	 * a method that prints the history of the user inputs
+	 * @param guesses
+	 */
 	public static void History(int guesses){
 	for(int i=0;i<guesses;i+=1){
 			System.out.println("Guess "+ (i+1) + ": " + History[i] + "		" + History[i] + " -> Result: " + Black_Peg_H[i] + " black peg(s) and " + White_Peg_H[i] + " white peg(s)");
