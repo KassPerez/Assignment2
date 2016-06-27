@@ -1,3 +1,13 @@
+/*  * EE422C Project 2 (Mastermind) submission by
+ * Replace <...> with your actual data. 
+ * Lei Liu
+ * LL28379
+ * Kassandra Perez
+ * KAP2589
+ * https://github.com/KassPerez/Assignment2.git
+ * Slip days used: <0>
+ * Summer 2016
+ */
 import java.util.Scanner;
 
 public class Game 
@@ -124,7 +134,10 @@ public class Game
 				else{
 					if(Game_Functions.check_input(answer)==true){
 						System.out.println("Your answer will be check");
-						System.out.println(Game_Functions.Answer[0] + Game_Functions.Answer[1] + Game_Functions.Answer[2]+ Game_Functions.Answer[3]);
+						for(int i=0; i<GameConfiguration.pegNumber; i+=1){
+							System.out.print(Game_Functions.Answer[i]);
+						}
+						System.out.println();
 						blackPegs=Game_Functions.Pegs_Check(answer, GameConfiguration.guessNumber-num_Guesses);
 						if(blackPegs==GameConfiguration.pegNumber){
 							System.out.println(answer + " -> Result: " + GameConfiguration.pegNumber + " black pegs - You win!!");
